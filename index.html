@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Angel Perez | Level 33</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#020611;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* =========================
+   PANTALLA DE INICIO
+========================= */
+
+#intro{
+    position:fixed;
+    inset:0;
+    background:#020611;
+    z-index:9999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:opacity 1s ease;
+}
+
+.intro-box{
+    width:90%;
+    max-width:700px;
+}
+
+.system{
+    font-family:'Orbitron',sans-serif;
+    color:#55c7ff;
+    letter-spacing:3px;
+    margin:12px 0;
+    text-shadow:0 0 15px #2196f3;
+}
+
+#loadingText{
+    min-height:30px;
+}
+
+.loading-container{
+    width:100%;
+    height:18px;
+    background:#111827;
+    border:1px solid #2196f3;
+    border-radius:20px;
+    margin:30px 0;
+    overflow:hidden;
+    box-shadow:0 0 20px rgba(33,150,243,.5);
+}
+
+#loadingBar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#2196f3,#7fd2ff);
+    box-shadow:0 0 20px #2196f3;
+    transition:width .2s;
+}
+
+#introTitle{
+    display:none;
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(2.5rem,8vw,5rem);
+    color:#7fd2ff;
+    text-shadow:
+        0 0 10px #2196f3,
+        0 0 30px #2196f3;
+    margin:25px 0;
+}
+
+#introLevel{
+    display:none;
+    color:gold;
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(1.2rem,4vw,2rem);
+    margin-bottom:30px;
+}
+
+.start-button{
+    display:none;
+    padding:18px 40px;
+    border:none;
+    border-radius:50px;
+    background:#2196f3;
+    color:white;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 30px #2196f3;
+    transition:.3s;
+}
+
+.start-button:hover{
+    transform:scale(1.1);
+    background:#4db7ff;
+    box-shadow:0 0 50px #2196f3;
+}
+
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+#stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+}
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 4s infinite;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+        opacity:.2;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-box{
+    max-width:900px;
+    padding:50px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:30px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 50px rgba(33,150,243,.2);
+}
+
+.hero h1{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(3rem,8vw,5rem);
+    color:#7fd2ff;
+    text-shadow:0 0 30px #2196f3;
+    margin:20px 0;
+}
+
+.hero h2{
+    font-family:'Orbitron',sans-serif;
+    color:gold;
+}
+
+.hero p{
+    line-height:1.8;
+}
+
+.main-button{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 35px;
+    border-radius:50px;
+    background:#2196f3;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 0 25px rgba(33,150,243,.6);
+    transition:.3s;
+}
+
+.main-button:hover{
+    transform:scale(1.08);
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+section{
+    padding:100px 8%;
+}
+
+.title{
+    font-family:'Orbitron',sans-serif;
+    text-align:center;
+    color:#7fd2ff;
+    font-size:clamp(1.8rem,5vw,2.8rem);
+    margin-bottom:50px;
+    text-shadow:0 0 20px rgba(33,150,243,.5);
+}
+
+
+/* =========================
+   TARJETA PERSONAJE
+========================= */
+
+.player-card{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:50px;
+    padding:50px;
+    background:rgba(255,255,255,.05);
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.avatar{
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:linear-gradient(180deg,#233d72,#07101f);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:90px;
+    box-shadow:
+        0 0 30px #2196f3,
+        0 0 70px rgba(33,150,243,.5);
+    animation:floating 4s infinite ease-in-out;
+}
+
+@keyframes floating{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+.info{
+    min-width:280px;
+}
+
+.info p{
+    margin:14px 0;
+}
+
+
+/* =========================
+   BOTONES DE DESBLOQUEO
+========================= */
+
+.unlock{
+    display:block;
+    margin:40px auto 0;
+    padding:14px 30px;
+    background:#0d1838;
+    color:#7fd2ff;
+    border:1px solid #2196f3;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.unlock:hover{
+    background:#2196f3;
+    color:white;
+    box-shadow:0 0 25px #2196f3;
+}
+
+
+/* =========================
+   CONTENIDO OCULTO
+========================= */
+
+.locked{
+    display:none;
+}
+
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.event{
+    background:#0d1838;
+    padding:25px;
+    border-left:5px solid #49c4ff;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.event:hover{
+    transform:translateX(8px);
+    box-shadow:0 0 20px rgba(73,196,255,.3);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#0d1838;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid transparent;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#2196f3;
+    box-shadow:0 0 30px rgba(33,150,243,.5);
+}
+
+.card h3{
+    color:#7fd2ff;
+    margin-bottom:15px;
+}
+
+.card p{
+    line-height:1.7;
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.stats{
+    max-width:900px;
+    margin:auto;
+}
+
+.stat{
+    margin-bottom:25px;
+}
+
+.bar{
+    height:25px;
+    background:#111;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.fill{
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,#2196f3,#7fd2ff);
+    border-radius:30px;
+    transition:width 2s ease;
+}
+
+
+/* =========================
+   ESCANEO
+========================= */
+
+.defect{
+    max-width:800px;
+    margin:auto;
+    padding:45px;
+    text-align:center;
+    background:#0d1838;
+    border-radius:25px;
+}
+
+.scan{
+    color:#7fd2ff;
+    font-family:'Orbitron',sans-serif;
+    margin:20px 0;
+}
+
+.error{
+    display:none;
+    color:#ff4d4d;
+    font-family:'Orbitron',sans-serif;
+    font-size:1.5rem;
+    margin-top:25px;
+}
+
+.salary{
+    display:none;
+    color:gold;
+    font-size:2rem;
+    margin-top:20px;
+}
+
+
+/* =========================
+   PARTE CURSI
+========================= */
+
+.cursi{
+    max-width:900px;
+    margin:auto;
+    padding:40px;
+    background:rgba(255,255,255,.05);
+    border-radius:25px;
+    line-height:2;
+    font-size:1.1rem;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.final h1{
+    font-family:'Orbitron',sans-serif;
+    color:gold;
+    font-size:clamp(2.5rem,7vw,5rem);
+    text-shadow:0 0 30px gold;
+    margin-bottom:30px;
+}
+
+.final p{
+    max-width:900px;
+    line-height:2;
+}
+
+.level{
+    font-family:'Orbitron',sans-serif;
+    font-size:2rem;
+    color:#7fd2ff;
+    margin-top:40px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    section{
+        padding:70px 6%;
+    }
+
+    .hero-box{
+        padding:30px 20px;
+    }
+
+    .player-card{
+        padding:30px 20px;
+    }
+
+    .avatar{
+        width:220px;
+        height:220px;
+    }
+
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     INTRO
+===================================== -->
+
+<div id="intro">
+
+    <div class="intro-box">
+
+        <div class="system" id="loadingText">
+            INICIANDO SISTEMA...
+        </div>
+
+        <div class="loading-container">
+            <div id="loadingBar"></div>
+        </div>
+
+        <h1 id="introTitle">
+            ANGEL PEREZ
+        </h1>
+
+        <div id="introLevel">
+            ⭐ LEVEL 33 UNLOCKED ⭐
+        </div>
+
+        <button class="start-button" id="startButton">
+            🎮 INICIAR AVENTURA
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ESTRELLAS -->
+
+<div id="stars"></div>
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero">
+
+    <div class="hero-box">
+
+        <p class="system">
+            JUGADOR ENCONTRADO
+        </p>
+
+        <h1>
+            ANGEL PEREZ
+        </h1>
+
+        <h2>
+            ⭐ LEVEL 33 UNLOCKED ⭐
+        </h2>
+
+        <br>
+
+        <p>
+            Según él, es el mejor del mundo.
+            <br>
+            Según la investigación realizada por esta página...
+            <br>
+            <strong>tiene razón.</strong>
+        </p>
+
+        <a href="#perfil" class="main-button">
+            🎮 CONTINUAR
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PERSONAJE
+===================================== -->
+
+<section id="perfil">
+
+    <h2 class="title">
+        PERSONAJE DESBLOQUEADO
+    </h2>
+
+    <div class="player-card">
+
+        <div class="avatar">
+            ⚔️
+        </div>
+
+        <div class="info">
+
+            <p><b>Nombre:</b> Angel Perez</p>
+
+            <p><b>Clase:</b> Jefe Supremo</p>
+
+            <p><b>Nivel:</b> 33</p>
+
+            <p><b>Rareza:</b> ⭐⭐⭐⭐⭐</p>
+
+            <p><b>Origen:</b> República Dominicana 🇩🇴</p>
+
+            <p><b>Residencia:</b> Estados Unidos 🇺🇸</p>
+
+            <p><b>Especialidad:</b> Perfumes y liderazgo</p>
+
+        </div>
+
+    </div>
+
+    <button class="unlock" onclick="unlockSection('lore')">
+        🔓 DESBLOQUEAR HISTORIA
+    </button>
+
+</section>
+
+
+<!-- =====================================
+     HISTORIA
+===================================== -->
+
+<section id="lore" class="locked">
+
+    <h2 class="title">
+        📜 LORE OFICIAL
+    </h2>
+
+    <div class="timeline">
+
+        <div class="event">
+            Año 1800 y algo. No somos matemáticos. Somos historiadores.
+        </div>
+
+        <div class="event">
+            Nace Angel Pérez.
+        </div>
+
+        <div class="event">
+            Hijo de una señora muy distinguida y de un señor del que no tengo mucha información,
+            pero entre ambos se la lucieron creando semejante hombre.
+        </div>
+
+        <div class="event">
+            Dominicano de nacimiento y ciudadano distinguido del barrio dondequiera que vaya.
+        </div>
+
+        <div class="event">
+            Actualmente vive en Estados Unidos en una casa tan organizada que los objetos
+            le piden permiso antes de moverse porque les da miedo... o porque le tienen gratitud.
+            Es difícil saberlo.
+        </div>
+
+        <div class="event">
+            Descubre los perfumes y desarrolla estándares que muy pocos pueden alcanzar.
+        </div>
+
+        <div class="event">
+            Se convierte en un moreno tatuado amante del gimnasio.
+        </div>
+
+        <div class="event">
+            Alcanza el Nivel 33.
+        </div>
+
+    </div>
+
+    <button class="unlock" onclick="unlockSection('powers')">
+        🔓 DESBLOQUEAR SUPERPODERES
+    </button>
+
+</section>
+
+
+<!-- =====================================
+     SUPERPODERES
+===================================== -->
+
+<section id="powers" class="locked">
+
+    <h2 class="title">
+        ⚡ SUPERPODERES
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🏆 EL MEJOR JEFE DEL MUNDO</h3>
+            <p>Paciencia nivel Moisés con los empleados.</p>
+        </div>
+
+        <div class="card">
+            <h3>🤝 BUEN AMIGO</h3>
+            <p>Siempre se puede contar con usted.</p>
+        </div>
+
+        <div class="card">
+            <h3>🧠 INTELIGENTE</h3>
+            <p>Hace parecer sencillas las cosas difíciles.</p>
+        </div>
+
+        <div class="card">
+            <h3>🛠 RESOLUTIVO</h3>
+            <p>Los problemas le tienen miedo.</p>
+        </div>
+
+        <div class="card">
+            <h3>📁 ORDENADO</h3>
+            <p>Sabe dónde está todo.</p>
+        </div>
+
+        <div class="card">
+            <h3>🧴 MAESTRO DE PERFUMES</h3>
+            <p>Nunca tiene demasiados perfumes.</p>
+        </div>
+
+        <div class="card">
+            <h3>💪 DISCIPLINADO</h3>
+            <p>Va al gimnasio voluntariamente.</p>
+        </div>
+
+        <div class="card">
+            <h3>❤️ GRAN SER HUMANO</h3>
+            <p>Su atributo más importante.</p>
+        </div>
+
+    </div>
+
+    <button class="unlock" onclick="unlockSection('stats')">
+        🔓 DESBLOQUEAR ESTADÍSTICAS
+    </button>
+
+</section>
+
+
+<!-- =====================================
+     ESTADÍSTICAS
+===================================== -->
+
+<section id="stats" class="locked">
+
+    <h2 class="title">
+        📊 ESTADÍSTICAS RPG
+    </h2>
+
+    <div class="stats">
+
+        <div class="stat">
+            Paciencia
+            <div class="bar">
+                <div class="fill" data-width="100"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            Liderazgo
+            <div class="bar">
+                <div class="fill" data-width="100"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            Carisma
+            <div class="bar">
+                <div class="fill" data-width="98"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            Inteligencia
+            <div class="bar">
+                <div class="fill" data-width="100"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            Flow Dominicano
+            <div class="bar">
+                <div class="fill" data-width="999"></div>
+            </div>
+        </div>
+
+        <div class="stat">
+            Perfumes
+            <div class="bar">
+                <div class="fill" data-width="100"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="unlock" onclick="unlockSection('achievements')">
+        🔓 DESBLOQUEAR LOGROS
+    </button>
+
+</section>
+
+
+<!-- =====================================
+     LOGROS
+===================================== -->
+
+<section id="achievements" class="locked">
+
+    <h2 class="title">
+        🏆 LOGROS DESBLOQUEADOS
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            🏆 <b>DOMINICANO TENÍA QUE SER</b>
+            <br><br>
+            Llegale al flow.
+        </div>
+
+        <div class="card">
+            🏆 Coleccionista de perfumes.
+        </div>
+
+        <div class="card">
+            🏆 Jefe legendario.
+        </div>
+
+        <div class="card">
+            🏆 Casa organizada nivel extremo.
+        </div>
+
+        <div class="card">
+            🏆 Superviviente profesional de la nómina.
+        </div>
+
+    </div>
+
+    <button class="unlock" onclick="unlockSection('scan')">
+        🔓 INICIAR ESCANEO DE DEFECTOS
+    </button>
+
+</section>
+
+
+<!-- =====================================
+     ESCANEO
+===================================== -->
+
+<section id="scan" class="locked">
+
+    <h2 class="title">
+        🔍 ESCANEO DE DEFECTOS
+    </h2>
+
+    <div class="defect">
+
+        <p class="scan" id="scanText">
+            Sistema preparado.
+        </p>
+
+        <button class="unlock" onclick="startScan()">
+            ▶ INICIAR ESCANEO
+        </button>
+
+        <div id="scanResult"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PARTE CURSI
+===================================== -->
+
+<section>
+
+    <h2 class="title">
+        ❤️ SECCIÓN CURSI
+    </h2>
+
+    <div class="cursi">
+
+        <p>
+            Más allá de los mil títulos que tiene y de todo lo que sabe hacer,
+            hay algo que destaca todavía más: la calidad humana.
+        </p>
+
+        <br>
+
+        <p>
+            Es una persona trabajadora, inteligente, auténtica y con un gran corazón.
+        </p>
+
+        <br>
+
+        <p>
+            Alguien que deja una huella positiva en quienes tienen la suerte de conocerle.
+        </p>
+
+        <br>
+
+        <p>
+            Esta página existe porque las personas excepcionales merecen ser reconocidas.
+            Y usted es una de ellas.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     FINAL
+===================================== -->
+
+<section class="final">
+
+    <h1>
+        🎂 FELIZ CUMPLEAÑOS 🎂
+    </h1>
+
+    <h2>
+        ANGEL PEREZ
+    </h2>
+
+    <br>
+
+    <p>
+        Le deseo mucha salud, felicidad, éxitos, tranquilidad y muchos motivos
+        para seguir disfrutando de todo lo bueno que ha construido con esfuerzo
+        a lo largo de los años.
+    </p>
+
+    <br>
+
+    <p>
+        Que este nuevo año llegue acompañado de nuevos logros,
+        experiencias memorables, buenos momentos y,
+        por supuesto, algunos perfumes nuevos para la colección.
+    </p>
+
+    <br>
+
+    <p>
+        Disfrute mucho su día porque se lo merece.
+    </p>
+
+    <br>
+
+    <p>
+        Y recuerde que las personas que le aprecian no necesitan esperar
+        a su cumpleaños para reconocer lo importante que es.
+    </p>
+
+    <div class="level">
+        ⭐ MISSION COMPLETE ⭐
+        <br>
+        LEVEL 33
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================
+   INTRO INTERACTIVA
+===================================== */
+
+const loadingText = document.getElementById("loadingText");
+const loadingBar = document.getElementById("loadingBar");
+const introTitle = document.getElementById("introTitle");
+const introLevel = document.getElementById("introLevel");
+const startButton = document.getElementById("startButton");
+
+let progress = 0;
+
+const messages = [
+    "INICIANDO SISTEMA...",
+    "CARGANDO BASE DE DATOS...",
+    "BUSCANDO JUGADOR...",
+    "ANALIZANDO PERFIL...",
+    "VERIFICANDO NIVEL...",
+    "JUGADOR ENCONTRADO."
+];
+
+const loading = setInterval(() => {
+
+    progress++;
+
+    loadingBar.style.width = progress + "%";
+
+    if(progress < 20){
+        loadingText.textContent = messages[0];
+    }
+    else if(progress < 40){
+        loadingText.textContent = messages[1];
+    }
+    else if(progress < 60){
+        loadingText.textContent = messages[2];
+    }
+    else if(progress < 80){
+        loadingText.textContent = messages[3];
+    }
+    else if(progress < 100){
+        loadingText.textContent = messages[4];
+    }
+    else{
+
+        clearInterval(loading);
+
+        loadingText.textContent = messages[5];
+
+        setTimeout(() => {
+
+            introTitle.style.display = "block";
+            introLevel.style.display = "block";
+            startButton.style.display = "inline-block";
+
+        },800);
+
+    }
+
+},40);
+
+
+/* =====================================
+   INICIAR AVENTURA
+===================================== */
+
+startButton.addEventListener("click", () => {
+
+    const intro = document.getElementById("intro");
+
+    intro.style.opacity = "0";
+
+    setTimeout(() => {
+
+        intro.style.display = "none";
+
+        document.getElementById("perfil").scrollIntoView({
+            behavior:"smooth"
+        });
+
+    },1000);
+
+});
+
+
+/* =====================================
+   DESBLOQUEAR SECCIONES
+===================================== */
+
+function unlockSection(id){
+
+    const section = document.getElementById(id);
+
+    section.classList.remove("locked");
+
+    setTimeout(() => {
+
+        section.scrollIntoView({
+            behavior:"smooth"
+        });
+
+    },100);
+
+}
+
+
+/* =====================================
+   ESTADÍSTICAS ANIMADAS
+===================================== */
+
+const statsSection = document.getElementById("stats");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            const bars = entry.target.querySelectorAll(".fill");
+
+            bars.forEach(bar => {
+
+                let width = bar.dataset.width;
+
+                if(width > 100){
+                    width = 100;
+                }
+
+                setTimeout(() => {
+                    bar.style.width = width + "%";
+                },200);
+
+            });
+
+        }
+
+    });
+
+},{threshold:.3});
+
+observer.observe(statsSection);
+
+
+/* =====================================
+   ESCANEO DE DEFECTOS
+===================================== */
+
+function startScan(){
+
+    const scanText = document.getElementById("scanText");
+    const result = document.getElementById("scanResult");
+
+    result.innerHTML = "";
+
+    let progress = 0;
+
+    const scan = setInterval(() => {
+
+        progress += 1;
+
+        scanText.textContent =
+            "ESCANEANDO... " + progress + "%";
+
+        if(progress >= 100){
+
+            clearInterval(scan);
+
+            setTimeout(() => {
+
+                scanText.textContent =
+                    "⚠️ ANÁLISIS COMPLETADO";
+
+                result.innerHTML = `
+                    <div class="error">
+                        ERROR
+                        <br><br>
+                        NO SE ENCONTRARON DEFECTOS.
+                    </div>
+
+                    <div class="salary">
+                        ❌ EXCEPCIÓN ENCONTRADA:
+                        <br>
+                        MI NÓMINA. 😂
+                    </div>
+                `;
+
+                document.querySelector(".error").style.display = "block";
+
+                setTimeout(() => {
+
+                    document.querySelector(".salary").style.display = "block";
+
+                },1000);
+
+            },500);
+
+        }
+
+    },30);
+
+}
+
+
+/* =====================================
+   ESTRELLAS
+===================================== */
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 200; i++){
+
+    const star = document.createElement("div");
+
+    star.classList.add("star");
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDuration =
+        Math.random() * 5 + 2 + "s";
+
+    star.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    stars.appendChild(star);
+}
+
+</script>
+
+</body>
+</html>
